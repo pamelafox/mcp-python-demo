@@ -1,4 +1,5 @@
-import httpx
+import subprocess
+
 from mcp.server.fastmcp import FastMCP
 
 mcp = FastMCP("My App")
@@ -13,18 +14,28 @@ def review_code(code: str) -> str:
     return f"Please review this code:\n\n{code}"
 
 @mcp.tool()
-def calculate_bmi(weight_kg: float, height_m: float) -> float:
-    """Calculate BMI given weight in kg and height in meters"""
-    return weight_kg / (height_m**2)
-
+async def add_list_of_numbers(numbers: list[int]) -> int:
+    """Add a list of numbers"""
+    return sum(numbers)
 
 @mcp.tool()
-async def fetch_weather(city: str) -> str:
-    """Fetch current weather for a city"""
-    async with httpx.AsyncClient() as client:
-        response = await client.get(f"https://api.weather.com/{city}")
-        return response.text
+def count_letter_in_text(text: str, letter: str) -> int:
+    """Count occurrences of a letter in a text"""
+    return text.count(letter)
 
+@mcp.tool()
+async def run_azure_cli_command(command: str) -> str:
+    """Run an Azure CLI command"""
+    # if command starts with "az", remove it
+    if command.startswith("az "):
+        command = command[3:]
+    result = subprocess.run(
+        ["az"] + command.split(),
+        capture_output=True,
+        text=True,
+        check=True
+    )
+    return result.stdout
 
 if __name__ == "__main__":
     mcp.run()
