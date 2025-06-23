@@ -2,6 +2,21 @@
 
 This repository demonstrates the use of Model Context Protocol (MCP) SDK for Python.
 
+## Setup
+
+### If using Dev Container (Recommended)
+
+If you're using the dev container (VS Code with Docker), everything is already set up for you! The container includes Python, uv, and all necessary tools.
+
+### If running locally
+
+1. Install [uv](https://docs.astral.sh/uv/getting-started/installation/) if you haven't already:
+
+2. Install dependencies from pyproject.toml:
+   ```bash
+   uv sync --dev
+   ```
+
 ## Running Development Inspector
 
 To run the development inspector:

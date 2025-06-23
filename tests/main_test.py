@@ -1,5 +1,9 @@
-from main import add_numbers
+import asyncio
+
+from server import add_list_of_numbers
 
 
 def test_add_numbers():
-    assert add_numbers(2, 2) == 4
+    """Test basic number addition"""
+    result = asyncio.run(add_list_of_numbers([2, 2]))
+    assert result == "Sum of [2, 2] = 4"

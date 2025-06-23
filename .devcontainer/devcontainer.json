@@ -5,6 +5,9 @@
     "image": "mcr.microsoft.com/devcontainers/python:3.12-bookworm",
     "features": {
         "ghcr.io/devcontainers/features/node:1": {
+        },
+        "ghcr.io/va-h/devcontainers-features/uv": {
+            "version": "latest"
         }
     },
     // Configure tool-specific properties.
@@ -40,7 +43,7 @@
 	"postCreateCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}",
 
 	// Use 'postStartCommand' to run commands after the container is started (more frequently than create).
-	"postStartCommand": "pip3 install --user -r requirements-dev.txt && pre-commit install",
+	"postStartCommand": "uv sync --dev && pre-commit install",
 
     // Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
     "remoteUser": "vscode"
