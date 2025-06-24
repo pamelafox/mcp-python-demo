@@ -8,6 +8,9 @@
         },
         "ghcr.io/va-h/devcontainers-features/uv": {
             "version": "latest"
+        },
+        "ghcr.io/devcontainers/features/azure-cli": {
+            "version": "latest"
         }
     },
     // Configure tool-specific properties.
@@ -43,7 +46,7 @@
 	"postCreateCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}",
 
 	// Use 'postStartCommand' to run commands after the container is started (more frequently than create).
-	"postStartCommand": "uv sync --dev && pre-commit install",
+	"postStartCommand": "uv sync --group dev && uv run pre-commit install",
 
     // Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
     "remoteUser": "vscode"

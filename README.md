@@ -10,7 +10,7 @@ If you're using the dev container (VS Code with Docker), everything is already s
 
 ### If running locally
 
-1. Install [uv](https://docs.astral.sh/uv/getting-started/installation/) if you haven't already:
+1. Install [uv](https://docs.astral.sh/uv/getting-started/installation/) if you haven't already
 
 2. Install dependencies from pyproject.toml:
    ```bash

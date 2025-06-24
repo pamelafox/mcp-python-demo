@@ -1,11 +1,13 @@
 from mcp import ClientSession, StdioServerParameters, types
+
+# Create server parameters for stdio connection
 from mcp.client.stdio import stdio_client
 
 # Create server parameters for stdio connection
 server_params = StdioServerParameters(
-    command="python",  # Executable
-    args=["server.py"],  # Optional command line arguments
-    env=None,  # Optional environment variables
+    command="uv",
+    args=["run", "server.py"],
+    env=None,
 )
 
 
@@ -50,16 +52,16 @@ async def run():
                 if content.type == "text":
                     print("Count letter result:", content.text)
 
-            # Test the Azure CLI tool (this will likely fail since Azure CLI may not be installed)
+            # Test run_azure_cli_command tool
             result = await session.call_tool("run_azure_cli_command", arguments={"command": "version"})
             if result.content and len(result.content) > 0:
                 content = result.content[0]
                 if content.type == "text":
                     print("Azure CLI result:", content.text)
 
-            # Test a prompt
+            # Test explain_code prompt
             result = await session.get_prompt(
-                "explain_code", arguments={"code": "def hello():\n    print('Hello World')", "level": "beginner"}
+                "explain_code", arguments={"code": "def hello():\n    print('Hello World')", "level": "advanced"}
             )
             if result.messages and len(result.messages) > 0:
                 message = result.messages[0]

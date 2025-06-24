@@ -267,38 +267,29 @@ dependencies = [
     { name = "mcp", extra = ["cli"] },
 ]
 
-[package.optional-dependencies]
+[package.dev-dependencies]
 dev = [
     { name = "black" },
     { name = "coverage" },
     { name = "pre-commit" },
     { name = "pytest" },
+    { name = "pytest-asyncio" },
     { name = "pytest-cov" },
     { name = "ruff" },
 ]
 
-[package.dev-dependencies]
-dev = [
-    { name = "pytest" },
-    { name = "pytest-asyncio" },
-]
-
 [package.metadata]
-requires-dist = [
-    { name = "black", marker = "extra == 'dev'" },
-    { name = "coverage", marker = "extra == 'dev'" },
-    { name = "mcp", extras = ["cli"], specifier = ">=1.9.4" },
-    { name = "pre-commit", marker = "extra == 'dev'" },
-    { name = "pytest", marker = "extra == 'dev'" },
-    { name = "pytest-cov", marker = "extra == 'dev'" },
-    { name = "ruff", marker = "extra == 'dev'" },
-]
-provides-extras = ["dev"]
+requires-dist = [{ name = "mcp", extras = ["cli"], specifier = ">=1.9.4" }]
 
 [package.metadata.requires-dev]
 dev = [
+    { name = "black" },
+    { name = "coverage" },
+    { name = "pre-commit" },
     { name = "pytest", specifier = ">=8.4.1" },
     { name = "pytest-asyncio", specifier = ">=1.0.0" },
+    { name = "pytest-cov" },
+    { name = "ruff" },
 ]
 
 [[package]]
