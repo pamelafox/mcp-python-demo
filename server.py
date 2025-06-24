@@ -75,12 +75,47 @@ def count_letter_in_text(text: str, letter: str) -> dict:
 )
 async def run_azure_cli_command(command: str) -> dict:
     """Run an Azure CLI command with enhanced error handling and structured output"""
+
+    # Essential commands for demo purposes
+    ALLOWED_COMMANDS = {"version", "account", "group", "resource", "storage", "vm", "webapp", "sql"}
+
     # if command starts with "az", remove it
     if command.startswith("az "):
         command = command[3:]
 
+    # Additional safety check for dangerous characters
+    dangerous_patterns = [";", "&&", "||", "|", ">", "<", "`", "$", "$(", "\n", "\r"]
+    if any(pattern in command for pattern in dangerous_patterns):
+        return {
+            "success": False,
+            "command": f"az {command}",
+            "message": "Command contains potentially dangerous characters",
+            "error_type": "ValidationError",
+        }
+
+    # Parse command safely
+    command_parts = command.split()
+    if not command_parts:
+        return {
+            "success": False,
+            "command": f"az {command}",
+            "message": "Empty command provided",
+            "error_type": "ValidationError",
+        }
+
+    base_command = command_parts[0]
+    if base_command not in ALLOWED_COMMANDS:
+        return {
+            "success": False,
+            "command": f"az {command}",
+            "message": (
+                f"Command '{base_command}' is not allowed. " f"Allowed commands: {', '.join(sorted(ALLOWED_COMMANDS))}"
+            ),
+            "error_type": "ValidationError",
+        }
+
     try:
-        result = subprocess.run(["az"] + command.split(), capture_output=True, text=True, check=True)
+        result = subprocess.run(["az"] + command_parts, capture_output=True, text=True, check=True, timeout=30)
 
         return {
             "success": True,
@@ -89,6 +124,16 @@ async def run_azure_cli_command(command: str) -> dict:
             "stdout": result.stdout,
             "stderr": result.stderr if result.stderr else None,
             "message": "Command executed successfully",
+        }
+    except subprocess.TimeoutExpired:
+        return {
+            "success": False,
+            "command": f"az {command}",
+            "exit_code": None,
+            "stdout": None,
+            "stderr": None,
+            "message": "Command timed out after 30 seconds",
+            "error_type": "TimeoutExpired",
         }
     except subprocess.CalledProcessError as e:
         return {
