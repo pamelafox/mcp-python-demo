@@ -13,7 +13,7 @@ If you're using the dev container (VS Code with Docker), everything is already s
 1. Install [uv](https://docs.astral.sh/uv/getting-started/installation/) if you haven't already
 
 2. Install dependencies from pyproject.toml:
-   ```bash
+   ```sh
    uv sync --dev
    ```
 
@@ -21,7 +21,7 @@ If you're using the dev container (VS Code with Docker), everything is already s
 
 To run the development inspector:
 
-```bash
+```sh
 mcp dev server.py
 ```
 
@@ -31,7 +31,7 @@ To install this MCP plugin in Claude:
 
 1. Run this command:
 
-   ```bash
+   ```sh
    mcp install server.py
    ```
 
@@ -39,7 +39,7 @@ To install this MCP plugin in Claude:
 
 3. Troubleshooting: If you get an error, fix the uv path in the config to an absolute path:
 
-   ```bash
+   ```sh
    which uv
    ```
 
