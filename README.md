@@ -12,7 +12,28 @@ If you're using the dev container (VS Code with Docker), everything is already s
 
 1. Install [uv](https://docs.astral.sh/uv/getting-started/installation/) if you haven't already
 
-2. Install dependencies from pyproject.toml:
+2. Create a virtual environment:
+
+   ```sh
+   uv venv
+   ```
+
+3. Activate the virtual environment:
+
+   - On macOS/Linux:
+
+     ```sh
+     source .venv/bin/activate
+     ```
+
+   - On Windows:
+
+     ```sh
+     .venv\Scripts\activate
+     ```
+
+4. Install dependencies from pyproject.toml:
+
    ```sh
    uv sync --dev
    ```
