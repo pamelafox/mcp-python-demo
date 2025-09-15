@@ -8,6 +8,12 @@ This repository demonstrates the use of Model Context Protocol (MCP) SDK for Pyt
 
 If you're using the dev container (VS Code with Docker), everything is already set up for you! The container includes Python, uv, and all necessary tools.
 
+### Getting Started
+```sh
+git clone https://github.com/<your-username>/mcp-python-demo.git
+cd mcp-python-demo
+```
+
 ### If running locally
 
 1. Install [uv](https://docs.astral.sh/uv/getting-started/installation/) if you haven't already
